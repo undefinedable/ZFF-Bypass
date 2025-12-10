@@ -1,0 +1,10 @@
+{
+    "api_url": "https://zeppelin-api.vercel.app/api/v1/freefire/uidbypass",
+    "proxy_port": 1337,
+    "use_bot": true,
+    "use_webhook": true,
+    "discord":{
+        "webhook_url": "",
+        "bot_token": ""
+    }
+}
