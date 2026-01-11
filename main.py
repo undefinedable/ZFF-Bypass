@@ -20,6 +20,7 @@ class MajorLoginInterceptor:
     def _match(self, flow: http.HTTPFlow) -> bool:
         return flow.request.method == "POST" and self.target in flow.request.path
 
+    # ---------------------------------- REQUEST --------------------------------- #
     def request(self, flow: http.HTTPFlow):
         if not self._match(flow):
             return
