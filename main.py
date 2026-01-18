@@ -68,6 +68,8 @@ class MajorLoginInterceptor:
 class ZLabs:
     @staticmethod
     def run_proxy(port: int):
+        ip = requests.get("https://ipinfo.io/ip", timeout=5).text.strip()
+        print(f"\033[1;32m🚀 Server listening at {ip}:{port}\033[0m")
         mitmdump([
             "-s", os.path.basename(__file__),
             "-p", str(port),
@@ -79,6 +81,7 @@ class ZLabs:
         """ Run Discord bot only. """
         bot = UIDBot(token=token)
         bot.run()
+
 
 api = ZeppelinAPI(config["api_url"])
 addons = [MajorLoginInterceptor(api)]
