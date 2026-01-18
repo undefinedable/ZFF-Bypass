@@ -74,13 +74,15 @@ class ZLabs:
         print(f"🟢  Status   : ONLINE")
         print(f"🌐  IP       : {ip}")
         print(f"🔌  Port     : {port}")
-        print(f"➡️  Connect to proxy server {ip}:{port}\n")
+        print(f"➡️  Connect to proxy server {ip}:{port}")
         print("=====" * 10)
         
+        confdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "certs")
         mitmdump([
             "-s", os.path.basename(__file__),
             "-p", str(port),
             "--set", "block_global=false",
+            "--set", f"confdir={confdir}"
         ])
     
     @staticmethod
