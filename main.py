@@ -1,4 +1,7 @@
-import os, threading, time
+import os, threading, time, sys
+
+if os.path.exists("/home/container") and os.getenv("PTERODACTYL_SERVER_UUID"):
+    sys.path.append("/home/container/.local/lib/python3.12/site-packages") # python 3.12
 
 from libs.bot import UIDBot
 from libs.api import ZeppelinAPI
