@@ -1,4 +1,4 @@
-import os, threading, time, sys
+import os, threading, time, sys, requests
 
 if os.path.exists("/home/container") and os.getenv("PTERODACTYL_SERVER_UUID"):
     sys.path.append("/home/container/.local/lib/python3.12/site-packages") # python 3.12
