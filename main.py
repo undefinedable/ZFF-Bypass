@@ -1,4 +1,4 @@
-import os, threading, time, sys, requests, glob
+import os, threading, time, sys, requests, glob, site
 
 # ---------------------------------------------------------------------------
 # Detect and configure Python environment inside Pterodactyl container.
@@ -11,8 +11,7 @@ import os, threading, time, sys, requests, glob
 # https://github.com/HaseoTM/parkervcp-eggs/blob/master/generic/python/egg-python-generic.json
 # ---------------------------------------------------------------------------
 if os.path.exists("/home/container") and os.getenv("PTERODACTYL_SERVER_UUID"):
-    paths = glob.glob("/home/container/.local/lib/python*/site-packages")
-    for p in paths:
+    for p in list(site.getsitepackages()) + [site.getusersitepackages()] + glob.glob("/home/container/.local/lib/python*/site-packages"):
         if p not in sys.path:
             sys.path.append(p)
 
