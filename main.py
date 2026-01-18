@@ -1,7 +1,20 @@
-import os, threading, time, sys, requests
+import os, threading, time, sys, requests, glob
 
+# ---------------------------------------------------------------------------
+# Detect and configure Python environment inside Pterodactyl container.
+#
+# This ensures that user-installed site-packages under
+# /home/container/.local/lib/pythonX.Y/site-packages are included in sys.path,
+# allowing the application to access dependencies installed via Pterodactyl Python Eggs.
+#
+# Reference:
+# https://github.com/HaseoTM/parkervcp-eggs/blob/master/generic/python/egg-python-generic.json
+# ---------------------------------------------------------------------------
 if os.path.exists("/home/container") and os.getenv("PTERODACTYL_SERVER_UUID"):
-    sys.path.append("/home/container/.local/lib/python3.12/site-packages") # python 3.12
+    paths = glob.glob("/home/container/.local/lib/python*/site-packages")
+    for p in paths:
+        if p not in sys.path:
+            sys.path.append(p)
 
 from libs.bot import UIDBot
 from libs.api import ZeppelinAPI
