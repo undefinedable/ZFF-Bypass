@@ -69,7 +69,12 @@ class ZLabs:
     @staticmethod
     def run_proxy(port: int):
         ip = requests.get("https://ipinfo.io/ip", timeout=5).text.strip()
-        print(f"\033[1;32m🚀 Server listening at {ip}:{port}\033[0m")
+
+        print(f"🟢  - Status   : ONLINE")
+        print(f"🌐  - IP       : {ip}")
+        print(f"🔌  - Port     : {port}")
+        print(f"➡️  - Connect to proxy server {ip}:{port}\n")
+        
         mitmdump([
             "-s", os.path.basename(__file__),
             "-p", str(port),
